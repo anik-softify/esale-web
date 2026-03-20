@@ -1,4 +1,4 @@
-import { CreateProductInput, Product } from "@/lib/types";
+import { AuthResponse, CreateProductInput, LoginInput, Product, RegisterInput } from "@/lib/types";
 
 const DEFAULT_TENANT_ID = "11111111-1111-1111-1111-111111111111";
 
@@ -62,6 +62,20 @@ export async function getProducts() {
 
 export async function createProduct(input: CreateProductInput) {
   return requestEsale<string>("/api/products", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+export async function loginUser(input: LoginInput) {
+  return requestEsale<AuthResponse>("/api/account/login", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+export async function registerUser(input: RegisterInput) {
+  return requestEsale<AuthResponse>("/api/account/register", {
     method: "POST",
     body: JSON.stringify(input),
   });
